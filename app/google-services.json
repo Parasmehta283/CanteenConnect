@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "191771754324",
+    "project_id": "collegecanteenapp-22ef3",
+    "storage_bucket": "collegecanteenapp-22ef3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191771754324:android:22ed3ed1e390ebfbcb52c1",
+        "android_client_info": {
+          "package_name": "com.canteenconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxhQSkYoT39ai1_yp9cJC69dCJutiqE-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

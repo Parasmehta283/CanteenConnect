@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.canteenconnect.app-mergeReleaseResources-61:/values-v30/values-v30.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\mehta\\.gradle\\caches\\8.9\\transforms\\74bda9a539bebf006bbaa3d191ed5306\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "72",
+                        "endOffsets": "123"
+                    }
+                }
+            ]
+        }
+    ]
+}

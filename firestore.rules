@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: get user role
+    function userRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    // Users can read their own profile; admins can read all
+    match /users/{uid} {
+      allow read: if request.auth.uid == uid;
+      allow write: if userRole() == 'admin';
+    }
+
+    // Menu items: everyone reads, only admin writes
+    match /menuItems/{itemId} {
+      allow read: if request.auth != null;
+      allow write: if userRole() == 'admin';
+    }
+
+    // Orders: students create/read their own; staff reads active orders; admin reads all
+    match /orders/{orderId} {
+      allow create: if request.auth != null && userRole() == 'student';
+      allow read:   if request.auth.uid == resource.data.studentId
+                    || userRole() == 'staff'
+                    || userRole() == 'admin';
+      allow update: if userRole() == 'staff' || userRole() == 'admin';
+    }
+
+    // Token counter: any authenticated user triggers increment (via transaction)
+    match /tokens/{doc} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
