@@ -147,48 +147,60 @@ fun CartScreen(
                                     }
                                 }
                                 
-                                Spacer(Modifier.width(12.dp))
+                                Spacer(Modifier.width(16.dp))
                                 
                                 Column(modifier = Modifier.weight(1f)) {
                                     Text(
                                         cart.menuItem.name,
                                         style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 2,
+                                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                                     )
+                                    
+                                    Spacer(Modifier.height(4.dp))
+                                    
                                     Text(
                                         "₹%.2f".format(cart.menuItem.price),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                                     )
-                                }
-                                
-                                Row(
-                                    modifier = Modifier
-                                        .background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(12.dp))
-                                        .padding(horizontal = 4.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    IconButton(onClick = { viewModel.removeFromCart(cart.menuItem) }, modifier = Modifier.size(36.dp)) {
-                                        Icon(Icons.Filled.Remove, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
+                                    
+                                    Spacer(Modifier.height(12.dp))
+                                    
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            "₹%.2f".format(cart.subtotal),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.ExtraBold,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+
+                                        Row(
+                                            modifier = Modifier
+                                                .background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(12.dp))
+                                                .padding(horizontal = 4.dp),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            IconButton(onClick = { viewModel.removeFromCart(cart.menuItem) }, modifier = Modifier.size(36.dp)) {
+                                                Icon(Icons.Filled.Remove, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
+                                            }
+                                            Text(
+                                                "${cart.quantity}",
+                                                fontWeight = FontWeight.Bold,
+                                                color = MaterialTheme.colorScheme.primary,
+                                                modifier = Modifier.padding(horizontal = 8.dp)
+                                            )
+                                            IconButton(onClick = { viewModel.addToCart(cart.menuItem) }, modifier = Modifier.size(36.dp)) {
+                                                Icon(Icons.Filled.Add, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
+                                            }
+                                        }
                                     }
-                                    Text(
-                                        "${cart.quantity}",
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.padding(horizontal = 8.dp)
-                                    )
-                                    IconButton(onClick = { viewModel.addToCart(cart.menuItem) }, modifier = Modifier.size(36.dp)) {
-                                        Icon(Icons.Filled.Add, null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
-                                    }
                                 }
-                                
-                                Spacer(Modifier.width(16.dp))
-                                Text(
-                                    "₹%.2f".format(cart.subtotal),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
                             }
                         }
                     }

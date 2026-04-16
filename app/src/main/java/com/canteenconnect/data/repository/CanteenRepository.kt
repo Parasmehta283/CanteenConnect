@@ -102,17 +102,11 @@ class CanteenRepository {
     // ──────────────────────────────────────────────────────────────────────────
 
     private suspend fun getNextToken(): Int {
-        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         val ref = db.collection("tokens").document("daily")
         return try {
             val snap = ref.get().await()
-            val storedDate = snap.getString("date") ?: ""
-            val counter = if (storedDate == today) {
-                (snap.getLong("counter") ?: 0L).toInt() + 1
-            } else {
-                1 // reset daily
-            }
-            ref.set(mapOf("date" to today, "counter" to counter)).await()
+            val counter = (snap.getLong("counter") ?: 0L).toInt() + 1
+            ref.set(mapOf("counter" to counter)).await()
             counter
         } catch (e: Exception) {
             (1..99).random()
