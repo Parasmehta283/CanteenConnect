@@ -64,8 +64,3 @@ orders/{orderId}
   - totalAmount: Double
   - createdAt: Timestamp
   - items: List<OrderItem>
-
-tokens/daily
-  - date: String (YYYY-MM-DD)
-  - counter: Int
-```
